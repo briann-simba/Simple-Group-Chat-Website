@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io("http://127.0.0.1:5000");
+            socket.on('connect', function() {
+                        socket.send("Kireiziii");
+    
+
+                    });
+                    socket.on('message',function(msg){
+                      $("#messages").append("<li>" +msg+"</li>")
+
+                    })
+
+                    $("#send_message").on('click',function(){
+
+                     var msg= $("#msg_here").val()
+                     socket.send(msg)
+                    
+                  console.log("Message:"+msg)
+                    })
+
+    });
+
+
+        </script>
+    <ul id="messages"></ul>
+    <input type="text" id="msg_here" ><button id="send_message" type="submit">Submit</button>
+    
+</body>
+
+</html>
